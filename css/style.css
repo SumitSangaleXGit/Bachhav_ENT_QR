@@ -1,0 +1,908 @@
+/* ==========================================================================
+   Bachhav ENT Hospital & Dental Care Clinic — style.css
+   Theme: light hospital — logo teal (#003850) + logo green (#007838)
+   Fonts: Playfair Display (headings) · Inter (body)
+   --------------------------------------------------------------------------
+   EDITING COLORS? Change the variables below — everything else follows.
+   ========================================================================== */
+
+:root {
+  /* Bachhav ENT brand palette — matched to the clinic logo (teal + green) */
+  --blue:          #003850;   /* primary deep teal  */
+  --blue-soft:     #0e5f80;   /* lighter teal       */
+  --blue-deep:     #00283a;   /* darker teal        */
+  --blue-dim:      rgba(0, 56, 80, 0.16);
+  --blue-faint:    rgba(0, 56, 80, 0.06);
+  --blue-grad:     linear-gradient(180deg, #003850, #0e5f80);
+  --blue-grad-soft: linear-gradient(180deg, #0a4a68, #1a7194); /* hover version   */
+
+  --green-text:    #1f7a3d;   /* darker green for text    */
+  --green-dim:     rgba(0, 120, 56, 0.16);
+  --green-faint:   rgba(0, 120, 56, 0.07);
+  --green-grad:    linear-gradient(180deg, #007838, #48a030);  /* logo green gradient */
+
+  --bg:            #f4f7fb;   /* page background  */
+  --bg-raised:     #ffffff;   /* cards, panels    */
+
+  --ink:           #16233b;   /* main text (deep navy) */
+  --ink-soft:      #45516b;   /* secondary text   */
+  --ink-faint:     #6b7792;   /* muted text       */
+
+  --line:          rgba(22, 35, 59, 0.10);
+  --line-accent:   rgba(0, 56, 80, 0.24);
+  --shadow-color:  rgba(22, 35, 59, 0.14);  /* card shadows */
+
+  color-scheme: light;
+
+  --font-display:  "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-body:     "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --radius-arch:   129px 129px 36px 36px;
+
+  --nav-h:         74px;
+}
+
+/* ------------------------------------------------------------------ base */
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.12;
+  color: var(--ink);
+}
+
+section[id] { scroll-margin-top: calc(var(--nav-h) + 14px); }
+
+::selection { background: var(--blue); color: #ffffff; }
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #eef1f6; }
+::-webkit-scrollbar-thumb { background: #c3cbd9; border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: var(--blue-soft); }
+
+a { color: var(--blue); text-decoration: none; }
+a:hover { color: var(--blue-deep); }
+
+img { max-width: 100%; }
+
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ------------------------------------------------------------------ type helpers */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 1.1rem;
+}
+.eyebrow::before {
+  content: "";
+  width: 26px;
+  height: 1px;
+  background: var(--blue);
+  opacity: 0.7;
+}
+.eyebrow.center { justify-content: center; }
+.eyebrow.center::after {
+  content: "";
+  width: 26px;
+  height: 1px;
+  background: var(--blue);
+  opacity: 0.7;
+}
+
+.accent-italic {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--blue-soft);
+}
+
+.section-title {
+  font-size: clamp(1.9rem, 3.4vw, 2.7rem);
+  margin-bottom: 1.1rem;
+}
+
+.section-lede {
+  color: var(--ink-soft);
+  font-size: 1.02rem;
+  max-width: 56ch;
+}
+
+.section { padding: clamp(4.5rem, 9vw, 7.5rem) 0; }
+.section-head { max-width: 720px; margin-bottom: 3rem; }
+
+/* ------------------------------------------------------------------ buttons */
+.btn-blue {
+  --bs-btn-bg: var(--blue);
+  --bs-btn-border-color: var(--blue);
+  --bs-btn-color: #ffffff;
+  --bs-btn-hover-bg: var(--blue-soft);
+  --bs-btn-hover-border-color: var(--blue-soft);
+  --bs-btn-hover-color: #ffffff;
+  --bs-btn-active-bg: var(--blue-soft);
+  --bs-btn-active-border-color: var(--blue-soft);
+  --bs-btn-active-color: #ffffff;
+  --bs-btn-font-weight: 600;
+  border-radius: 999px;
+  letter-spacing: 0.01em;
+  background-color: var(--blue);
+  background-image: var(--blue-grad);
+  box-shadow: 0 8px 24px rgba(0, 56, 80, 0.22);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+.btn-blue:hover {
+  transform: translateY(-2px);
+  background-image: var(--blue-grad-soft);
+  box-shadow: 0 12px 30px rgba(0, 56, 80, 0.32);
+}
+
+/* light sheen that sweeps across the blue button on hover */
+.btn-blue { position: relative; overflow: hidden; }
+.btn-blue::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.55s ease;
+}
+.btn-blue:hover::after { left: 150%; }
+
+/* tiny green text helper */
+.text-green { color: var(--green-text) !important; }
+
+/* ------------------------------------------------------------------ navbar
+   Floating capsule: rounded at both ends, never touching the screen edges,
+   so the page reads as one rounded single-page surface. */
+#mainNav {
+  top: 12px;
+  left: 0;
+  right: 0;
+  margin-inline: auto;
+  max-width: 1240px;
+  width: calc(100% - 24px);
+  padding: 0.55rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 10px 30px var(--shadow-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+}
+#mainNav.scrolled {
+  padding: 0.45rem 0.85rem;
+  background: rgba(255, 255, 255, 0.97);
+  border-color: var(--line-accent);
+  box-shadow: 0 14px 38px var(--shadow-color);
+}
+
+.navbar-brand { display: flex; align-items: center; gap: 0.7rem; }
+
+.brand-text { display: flex; flex-direction: column; line-height: 1.15; }
+.brand-text strong {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
+.brand-text small {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.brand-mark {
+  display: inline-grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 10px 10px 10px 4px;   /* slight irregularity, on purpose */
+  background: var(--blue);
+  background-image: var(--blue-grad);
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.02rem;
+  letter-spacing: 0.04em;
+  box-shadow: 0 4px 14px rgba(0, 56, 80, 0.30);
+}
+/* when the mark holds the real logo image instead of a monogram */
+.brand-mark-img { background: none !important; background-image: none !important; box-shadow: none !important; padding: 2px; }
+.brand-mark-img img { display: block; width: 100%; height: 100%; object-fit: contain; }
+
+.navbar-toggler {
+  border-color: var(--line-accent);
+  padding: 0.4rem 0.55rem;
+  margin-left: auto;   /* keeps hamburger + theme switch grouped on the right */
+}
+.navbar-toggler:focus { box-shadow: 0 0 0 3px var(--blue-dim); }
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0,56,80,0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* --- day / night switch --- */
+.theme-toggle {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  margin-left: 0.6rem;
+  border-radius: 50%;
+  border: 1px solid var(--line-accent);
+  background: var(--bg-raised);
+  color: var(--blue);
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease,
+              background-color 0.25s ease, color 0.25s ease;
+}
+.theme-toggle:hover {
+  transform: translateY(-2px) rotate(10deg);
+  border-color: var(--blue-soft);
+  box-shadow: 0 8px 20px var(--shadow-color);
+}
+.theme-toggle i { line-height: 1; }
+.theme-toggle .bi-moon-stars-fill { display: none; }
+html[data-theme="dark"] .theme-toggle {
+  color: var(--blue-soft);
+  border-color: var(--line-accent);
+  background: var(--blue-faint);
+}
+html[data-theme="dark"] .theme-toggle .bi-sun-fill { display: none; }
+html[data-theme="dark"] .theme-toggle .bi-moon-stars-fill { display: block; }
+
+/* ------------------------------------------------------------------ hero */
+.hero {
+  position: relative;
+  padding: calc(var(--nav-h) + clamp(1.5rem, 3.5vw, 2.5rem)) 0 clamp(2.5rem, 5vw, 4rem);
+  background:
+    radial-gradient(900px 480px at 82% -8%, rgba(46, 109, 180, 0.10), transparent 62%),
+    radial-gradient(700px 420px at -12% 108%, rgba(0, 56, 80, 0.07), transparent 60%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-raised) 100%);
+  border-bottom: 1px solid var(--line);
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(22, 35, 59, 0.06) 1px, transparent 1px);
+  background-size: 26px 26px;
+  opacity: 0.5;
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent 70%);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent 70%);
+}
+
+.hero-title {
+  font-size: clamp(2.4rem, 5.4vw, 4rem);
+  font-weight: 600;
+  margin-bottom: 1.6rem;
+  letter-spacing: -0.01em;
+}
+
+.hero-lede {
+  position: relative;
+  color: var(--ink-soft);
+  font-size: 1.06rem;
+  max-width: 52ch;
+  padding-left: 1.15rem;
+  border-left: 2px solid var(--blue);
+  margin-bottom: 1.6rem;
+}
+
+.hero-pills { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2rem; }
+
+.pill {
+  padding: 0.45rem 1.05rem;
+  border-radius: 999px;
+  border: 1px solid var(--green-dim);
+  background: var(--green-faint);
+  color: var(--green-text);
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  transition: background-color 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+}
+.pill:hover { background: var(--green-dim); transform: translateY(-2px); border-color: var(--green-text); }
+
+.hero-cta { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+.hero-cta .btn { padding: 0.85rem 1.7rem; }
+
+/* secondary / outline button (used next to the blue CTA) */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid var(--line-accent);
+  background: var(--bg-raised);
+  color: var(--blue);
+  font-weight: 600;
+  padding: 0.85rem 1.7rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+}
+.btn-ghost:hover {
+  transform: translateY(-2px);
+  background: var(--blue-faint);
+  border-color: var(--blue-soft);
+  color: var(--blue);
+  box-shadow: 0 10px 26px var(--shadow-color);
+}
+
+/* 5-star rating row — logo green stars */
+.stars {
+  display: inline-flex;
+  gap: 0.22rem;
+  color: var(--green-text);
+  font-size: 1.05rem;
+  line-height: 1;
+}
+html[data-theme="dark"] .stars { color: var(--green-text); }
+
+/* --- hero review spotlight card --- */
+.review-spotlight {
+  position: relative;
+  padding: 2rem 1.9rem;
+  border-radius: 28px 28px 28px 10px;
+  border: 1px solid var(--line-accent);
+  background: var(--bg-raised);
+  box-shadow: 0 30px 70px var(--shadow-color);
+  overflow: hidden;
+}
+.review-spotlight::before {
+  content: "";
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  background: rgba(0, 56, 80, 0.10);
+  filter: blur(14px);
+  pointer-events: none;
+}
+
+.rs-head { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.2rem; position: relative; }
+
+.rs-google {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid var(--line-accent);
+  color: var(--blue);
+  font-size: 1.45rem;
+  box-shadow: 0 8px 22px var(--shadow-color);
+}
+
+.rs-label { display: flex; flex-direction: column; line-height: 1.25; }
+.rs-label small {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.rs-label strong { font-family: var(--font-display); font-size: 1.35rem; color: var(--ink); }
+
+.review-spotlight .stars { margin-bottom: 0.9rem; position: relative; }
+
+.rs-text { color: var(--ink-soft); font-size: 0.98rem; margin-bottom: 1.4rem; position: relative; }
+
+.rs-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; position: relative; }
+.rs-actions .btn { padding: 0.75rem 1.4rem; }
+
+/* --- hero photo: arch + floating badge --- */
+.hero-figure { position: relative; max-width: 300px; margin-inline: auto; }
+
+.arch-photo {
+  border-radius: var(--radius-arch);
+  overflow: hidden;
+  border: 1px solid var(--line-accent);
+  background: var(--bg-raised);
+  box-shadow: 0 30px 70px var(--shadow-color);
+}
+.arch-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.hero-figure:hover .arch-photo img { transform: scale(1.03); }
+
+.badge-float {
+  position: absolute;
+  left: -14px;
+  bottom: 34px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.15rem 0.75rem 0.8rem;
+  border-radius: 16px 16px 16px 6px;
+  background: var(--bg-raised);
+  border: 1px solid var(--line-accent);
+  box-shadow: 0 16px 40px var(--shadow-color);
+  animation: floaty 5.5s ease-in-out infinite;
+}
+.badge-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px 12px 12px 4px;
+  background: var(--blue);
+  background-image: var(--blue-grad);
+  color: #ffffff;
+  font-size: 1.15rem;
+}
+.badge-text { display: flex; flex-direction: column; line-height: 1.25; }
+.badge-text strong { font-family: var(--font-display); font-size: 1.02rem; color: var(--ink); }
+.badge-text span { font-size: 0.8rem; color: var(--ink-soft); letter-spacing: 0.02em; }
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-9px); }
+}
+
+/* ------------------------------------------------------------------ doctor */
+.section-doctor {
+  background: var(--bg-raised);
+  border-bottom: 1px solid var(--line);
+}
+
+.doctor-photo {
+  border-radius: 24px 24px 24px 8px;
+  overflow: hidden;
+  border: 1px solid var(--green-dim);
+  background: var(--bg-raised);
+  box-shadow: 0 24px 55px var(--shadow-color);
+}
+.doctor-photo img { display: block; width: 100%; height: auto; }
+
+.doctor-intro {
+  color: var(--ink-soft);
+  font-size: 1.02rem;
+  max-width: 58ch;
+}
+
+.doctor-quals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 1.6rem 0 1.4rem;
+  list-style: none;
+  padding: 0;
+}
+.qual-chip {
+  padding: 0.45rem 1.05rem;
+  border-radius: 999px;
+  background: var(--green-faint);
+  border: 1px solid var(--green-dim);
+  color: var(--green-text);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+/* ------------------------------------------------------------------ reviews / social */
+.section-reviews { background: var(--bg); }
+
+.social-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  height: 100%;
+  padding: 1.8rem 1.7rem;
+  border-radius: 22px 22px 22px 8px;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.social-card::before {
+  content: "";
+  position: absolute;
+  top: -70px;
+  right: -70px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: var(--sc-glow, var(--blue-faint));
+  filter: blur(10px);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.social-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--line-accent);
+  box-shadow: 0 20px 45px var(--shadow-color);
+  color: var(--ink);
+}
+.social-card:hover::before { opacity: 1; }
+
+.sc-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.sc-top i { font-size: 0.9rem; opacity: 0; transform: translate(-4px, 4px); transition: opacity 0.25s ease, transform 0.25s ease; }
+.social-card:hover .sc-top i { opacity: 1; transform: translate(0, 0); }
+
+.sc-icon {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  color: #fff;
+  box-shadow: 0 8px 22px var(--shadow-color);
+}
+
+.sc-body { display: flex; flex-direction: column; gap: 0.3rem; }
+.sc-title { font-family: var(--font-display); font-size: 1.3rem; color: var(--ink); }
+.sc-sub { font-size: 0.92rem; color: var(--ink-soft); }
+
+/* brand-tinted circles */
+.sc-google     { --sc-glow: rgba(0, 56, 80, 0.14); }
+.sc-google .sc-icon     { background: #ffffff; color: var(--blue); border: 1px solid var(--line-accent); }
+
+/* large Google review card — the centrepiece of the page */
+.sc-google-big { min-height: 320px; justify-content: center; align-items: flex-start; }
+.sc-google-big .sc-icon { width: 64px; height: 64px; font-size: 1.8rem; }
+.sc-google-big .sc-title { font-size: 1.7rem; }
+.sc-google-big .stars { font-size: 1.5rem; margin: 0.2rem 0; }
+.sc-google-big .sc-sub { font-size: 1rem; max-width: 46ch; }
+
+/* "write a review" card — gold pencil tint */
+.sc-review    { --sc-glow: rgba(0, 120, 56, 0.18); }
+.sc-review .sc-icon     { background: var(--green-grad); }
+.sc-instagram  { --sc-glow: rgba(225, 48, 108, 0.14); }
+.sc-instagram .sc-icon  { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+.sc-facebook   { --sc-glow: rgba(24, 119, 242, 0.15); }
+.sc-facebook .sc-icon   { background: #1877f2; }
+.sc-youtube    { --sc-glow: rgba(255, 0, 0, 0.13); }
+.sc-youtube .sc-icon    { background: #ff0000; }
+.sc-location   { --sc-glow: rgba(63, 165, 53, 0.15); }
+.sc-location .sc-icon   { background: var(--green-grad); }
+
+/* ------------------------------------------------------------------ contact CTA */
+.section-contact { padding-bottom: clamp(5rem, 10vw, 8rem); background: var(--bg-raised); }
+
+.cta-card {
+  position: relative;
+  text-align: center;
+  padding: clamp(2.8rem, 6vw, 5rem) clamp(1.4rem, 5vw, 5rem);
+  border-radius: 40px 40px 40px 14px;   /* irregular, hand-drawn feel */
+  border: 1px solid var(--line-accent);
+  background:
+    radial-gradient(720px 320px at 50% -12%, rgba(46, 109, 180, 0.10), transparent 60%),
+    radial-gradient(520px 300px at 92% 110%, rgba(0, 56, 80, 0.08), transparent 60%),
+    var(--bg-raised);
+  overflow: hidden;
+}
+.cta-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(22, 35, 59, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.6;
+}
+
+.cta-title {
+  font-size: clamp(2rem, 4.4vw, 3.2rem);
+  max-width: 22ch;
+  margin: 0 auto 1.2rem;
+}
+.cta-lede {
+  color: var(--ink-soft);
+  max-width: 52ch;
+  margin: 0 auto 2.4rem;
+  font-size: 1.03rem;
+}
+
+.cta-pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.9rem;
+  margin-bottom: 2.4rem;
+  position: relative;
+  z-index: 1;
+}
+
+.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  font-weight: 600;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+.pill-btn:hover { transform: translateY(-3px); }
+
+.pill-phone {
+  background: var(--blue);
+  background-image: var(--blue-grad);
+  color: #ffffff;
+  box-shadow: 0 10px 26px rgba(0, 56, 80, 0.28);
+}
+.pill-phone:hover { background-color: var(--blue-soft); background-image: var(--blue-grad-soft); color: #ffffff; box-shadow: 0 14px 32px rgba(0, 56, 80, 0.38); }
+
+.pill-email {
+  background: var(--bg-raised);
+  color: var(--blue);
+  border: 1px solid var(--line-accent);
+}
+.pill-email:hover { background: var(--blue-faint); color: var(--blue);  box-shadow: 0 10px 26px var(--shadow-color); }
+
+.pill-btn i { font-size: 1.15rem; }
+.pill-btn span { display: flex; flex-direction: column; text-align: left; line-height: 1.25; }
+.pill-btn small {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.address-bar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem 1.2rem;
+  padding: 1.05rem 1.6rem;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  max-width: 780px;
+  margin: 0 auto;
+}
+.address-bar > i { color: var(--green-text); font-size: 1.2rem; }
+.address-text { color: var(--ink-soft); font-size: 0.95rem; }
+.address-link {
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--blue);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: gap 0.25s ease;
+}
+.address-link:hover { gap: 0.6rem; color: var(--blue-deep); }
+
+/* ------------------------------------------------------------------ footer
+   Floating capsule — same glass treatment as the navbar. */
+.footer {
+  margin: 0 auto clamp(1.2rem, 3vw, 2.4rem);
+  max-width: 1240px;
+  width: calc(100% - 24px);
+  background: var(--bg);   /* blends with the page — the footer is part of the site */
+}
+.footer-shell {
+  background: var(--bg);   /* same as the page — the footer is part of the site */
+  padding: 1.5rem clamp(1.1rem, 3.5vw, 2.6rem) 1.3rem;   /* slim */
+  color: var(--ink);
+}
+.footer-inner {
+  display: flex;
+  justify-content: center;   /* social icons centered */
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid var(--line);
+}
+.footer-social { display: flex; gap: 0.7rem; list-style: none; margin: 0; padding: 0; }
+.footer-social a {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px 14px 14px 5px;
+  border: 1px solid var(--line-accent);
+  background: var(--bg-raised);
+  color: var(--blue);
+  font-size: 1.1rem;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+.footer-social a:hover {
+  background: var(--blue);
+  color: #ffffff;
+  transform: translateY(-3px);
+}
+
+.footer-bottom {
+  padding-top: 1.1rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+.footer-bottom p { margin: 0; }
+
+/* ------------------------------------------------------------------ day / night theme
+   Light values live in :root above. These overrides swap the CSS variables;
+   almost everything else (cards, pills, buttons, shadows) follows automatically. */
+html[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg:            #0c1424;   /* page background      */
+  --bg-raised:     #141e33;   /* cards, panels        */
+
+  --ink:           #e8eefb;   /* main text            */
+  --ink-soft:      #b0bcd4;   /* secondary text       */
+  --ink-faint:     #7e8da9;   /* muted text           */
+
+  --blue-soft:     #58a7c4;   /* lighter teal accents */
+  --blue-deep:     #7fb8d4;   /* link hover           */
+  --blue-dim:      rgba(88, 167, 196, 0.22);
+  --blue-faint:    rgba(88, 167, 196, 0.09);
+
+  --green-text:    #8ed08f;   /* lighter green        */
+  --green-dim:     rgba(142, 208, 143, 0.20);
+  --green-faint:   rgba(142, 208, 143, 0.09);
+
+  --line:          rgba(232, 238, 251, 0.10);
+  --line-accent:   rgba(122, 172, 236, 0.30);
+  --shadow-color:  rgba(0, 0, 0, 0.5);
+}
+
+html[data-theme="dark"] ::-webkit-scrollbar-track { background: #0a101d; }
+html[data-theme="dark"] ::-webkit-scrollbar-thumb { background: #2a3853; }
+html[data-theme="dark"] :focus-visible { outline-color: var(--blue-soft); }
+
+/* dark navbar capsule + mobile panel + hamburger icon */
+html[data-theme="dark"] #mainNav {
+  background: rgba(10, 17, 31, 0.85);
+  border-color: rgba(122, 172, 236, 0.16);
+}
+html[data-theme="dark"] #mainNav.scrolled {
+  background: rgba(10, 17, 31, 0.97);
+  border-color: var(--line-accent);
+}
+html[data-theme="dark"] .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(232,238,251,0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+@media (max-width: 991.98px) {
+  html[data-theme="dark"] #mainNav .navbar-collapse {
+    background: rgba(13, 21, 37, 0.98);
+    border-color: var(--line-accent);
+  }
+}
+
+/* dot grids become light-on-dark */
+html[data-theme="dark"] .hero::after,
+html[data-theme="dark"] .cta-card::after {
+  background-image: radial-gradient(rgba(232, 238, 251, 0.07) 1px, transparent 1px);
+}
+
+/* the footer shell uses var(--bg), so it matches the page in dark mode automatically */
+/* lighter icon tint so the social icons stay readable in dark mode */
+html[data-theme="dark"] .footer-social a { color: var(--blue-soft); }
+
+/* ------------------------------------------------------------------ misc extras */
+/* OPD hours line inside the contact card */
+.cta-hours {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  position: relative;
+  z-index: 1;
+}
+.cta-hours i { color: var(--green-text); }
+
+/* back-to-top button */
+.to-top {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 1050;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px 14px 14px 5px;
+  background: var(--blue);
+  background-image: var(--blue-grad);
+  color: #ffffff;
+  font-size: 1.1rem;
+  box-shadow: 0 10px 24px rgba(0, 56, 80, 0.32);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+}
+.to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+.to-top:hover { background-color: var(--blue-soft); background-image: var(--blue-grad-soft); color: #ffffff; }
+
+/* ------------------------------------------------------------------ scroll reveal
+   Hidden ONLY once main.js confirms it is alive (html.js-ready), so
+   content is never stuck invisible if main.js fails to load or throws. */
+html.js-ready .reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--d, 0ms);
+  will-change: opacity, transform;
+}
+html.js-ready .reveal.revealed { opacity: 1; transform: translateY(0); }
+
+/* ------------------------------------------------------------------ responsive tweaks */
+@media (max-width: 991.98px) {
+  /* keep the theme switch on the first row with the hamburger; the
+     collapse takes a full flex row on mobile (flex-basis: 100%) */
+  #mainNav .theme-toggle { order: 3; }
+  #mainNav .navbar-collapse { order: 4; }
+
+  #mainNav .navbar-collapse {
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid var(--line-accent);
+    border-radius: 18px;
+    padding: 1.1rem 1.2rem;
+    margin-top: 0.8rem;
+  }
+  .hero-title { letter-spacing: -0.005em; }
+  .hero-row { row-gap: 3.5rem; }
+  .badge-float { left: 8px; bottom: 26px; }
+}
+
+@media (max-width: 575.98px) {
+  .hero-cta .btn { width: 100%; justify-content: center; }
+  .cta-pills .pill-btn { width: 100%; justify-content: center; }
+  .address-bar { flex-direction: column; text-align: center; }
+  #mainNav, .footer { width: calc(100% - 16px); }
+  #mainNav { top: 10px; }
+}
+
+/* respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  html.js-ready .reveal,
+  html.js-ready .reveal.revealed { opacity: 1; transform: none; transition: none; }
+  .badge-float { animation: none; }
+  * { transition-duration: 0.01ms !important; }
+}
